@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h1>{% trans "Tasks" %}</h1>
+</div>
+<div class="container">
+    <form action="{% url 'tasks_index' %}" method="get">
+        {% bootstrap_form filter.form %}
+        <div class="d-flex gap-2 mb-3">
+            <input type="submit" class ="btn btn-primary" value='{% trans "Search" %}'>            
+        </div>
+    </form>
+    <a href="{% url 'task_create' %}" class="btn btn-primary">{% trans "Create task" %}</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{% trans "ID" %}</th>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th>{% trans "Owner" %}</th>
+            <th>{% trans "Executor" %}</th>
+            <th>{% trans "Created at" %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
+            <td>{{ task.status.name }}</td>
+            <td>{{ task.owner.get_full_name }}</td>
+            <td>{{ task.executor.get_full_name }}</td>
+            <td>{{ task.created_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                <a href="{% url 'task_update' task.id %}" class="btn btn-primary">{% trans "Update" %}</a>
+                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">{% trans "Delete" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

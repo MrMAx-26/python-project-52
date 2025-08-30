@@ -34,11 +34,10 @@ ALLOWED_HOSTS = ['localhost', 'webserver', '127.0.0.1', 'python-project-52-yj6x.
 
 INSTALLED_APPS = [
     'task_manager',
-    'task_manager.labels',
     'task_manager.statuses',
     'task_manager.users',
     'task_manager.tasks',
-    'task_manager.tests',
+    'task_manager.labels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'django_filters',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,13 +87,17 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_database_name',  # Убедитесь, что это правильное имя базы данных
+        'USER': 'postgres',  # Убедитесь, что это правильное имя пользователя
+        'PASSWORD': 'new_password',  # Убедитесь, что это правильный пароль
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES["default"].update(db_from_env)
+###db_from_env = dj_database_url.config(conn_max_age=600)
+###DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -132,6 +136,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
