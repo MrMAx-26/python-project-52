@@ -5,8 +5,7 @@ description = ""
 authors = [
     { name = "Maxim Shevtsov", email= "Shevtsov_stv@mail.ru" }
 ]
-readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "dj-database-url>=2.3.0",
     "django>=5.2",
@@ -19,15 +18,20 @@ dependencies = [
     "django-filter>=25.1",
     "rollbar>=1.3.0",
     "pytest-cov>=6.1.1",
-    "pytest-django>=4.11.1",]
+    "pytest-django>=4.11.1",
+]
 
+[dependency-groups]
+dev = [
+    "ruff>=0.9.6",
+]
 
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["task_manager"]
+packages = ["task_manager", "task_manager.labels", "task_manager.statuses", "task_manager.tasks", "task_manager.users", "task_manager.tests"]
 
 [tool.uv]
 package = true
