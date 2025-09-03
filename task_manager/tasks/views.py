@@ -1,23 +1,24 @@
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic import (
-    CreateView,
-    UpdateView,
-    DeleteView,
-    DetailView,
-)
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from .models import Task
-from .forms import TaskForm
-from task_manager.mixins import (
-    CustomLoginRequiredMixin,
-    ContextMixin,
-    ContextDeleteMixin,
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    UpdateView,
 )
 from django_filters.views import FilterView
-from .forms import TaskFilter
+
+from task_manager.mixins import (
+    ContextDeleteMixin,
+    ContextMixin,
+    CustomLoginRequiredMixin,
+)
+
+from .forms import TaskFilter, TaskForm
+from .models import Task
 
 
 class TaskListView(CustomLoginRequiredMixin, FilterView):

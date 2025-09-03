@@ -1,10 +1,12 @@
-from django.views.generic import TemplateView
 from django.contrib import messages
-from django.contrib.auth.views import LoginView, LogoutView as BaseLogoutView
-from django.utils.translation import gettext_lazy as _
-from .forms import UserLoginForm
-from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import TemplateView
+
+from .forms import UserLoginForm
 from .mixins import ContextMixin, FormValidMixin
 
 

@@ -1,13 +1,15 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from .models import Status
-from .forms import StatusForm
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from task_manager.mixins import (
-    CustomLoginRequiredMixin,
-    ContextMixin,
     ContextDeleteMixin,
+    ContextMixin,
+    CustomLoginRequiredMixin,
 )
+
+from .forms import StatusForm
+from .models import Status
 
 
 class StatusesIndexView(CustomLoginRequiredMixin, ListView):

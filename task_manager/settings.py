@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-from pathlib import Path
-import dj_database_url
-from dotenv import load_dotenv
 import os
+from pathlib import Path
+
+import dj_database_url
 import rollbar
+from dotenv import load_dotenv
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
-ALLOWED_HOSTS=['python-project-52-yj6x.onrender.com', 'webserver']
+ALLOWED_HOSTS = ['python-project-52-yj6x.onrender.com', 'webserver']
 
 ROLLBAR = {
     'access_token': os.getenv("ROLLBAR_ACCESS_TOKEN"),

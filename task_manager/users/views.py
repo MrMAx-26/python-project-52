@@ -1,14 +1,16 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from .models import User
-from .forms import UserRegisterForm
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from task_manager.mixins import (
-    UserEditPermissionMixin,
-    UserDeletePermissionMixin,
-    ContextMixin,
     ContextDeleteMixin,
+    ContextMixin,
+    UserDeletePermissionMixin,
+    UserEditPermissionMixin,
 )
+
+from .forms import UserRegisterForm
+from .models import User
 
 
 class UsersIndexView(ListView):
