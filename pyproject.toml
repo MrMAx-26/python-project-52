@@ -21,10 +21,6 @@ dependencies = [
     "pytest-cov>=6.1.1",
     "pytest-django>=4.11.1",]
 
-[dependency-groups]
-dev = [
-    "flake8>=7.2.0",
-]
 
 [build-system]
 requires = ["setuptools>=61.0"]
