@@ -1,20 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# скачиваем uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env
 
-# Укажите путь к виртуальному окружению
-VENV_PATH=".venv/bin/python"  # Для Linux или macOS
-# VENV_PATH=".venv\Scripts\python.exe"  # Для Windows (раскомментируйте эту строку, если используете Windows)
-
-# Убедитесь, что виртуальное окружение создано
-if [ ! -d ".venv" ]; then
-    python -m venv .venv
-fi
-
-# Установка зависимостей
-$VENV_PATH -m pip install --upgrade pip  # Обновление pip
-$VENV_PATH -m pip install -r requirements.txt
-
-# Запуск миграций
-$VENV_PATH manage.py migrate
-
-# Запуск сервера
-$VENV_PATH manage.py runserver 0.0.0.0:8000
+# здесь добавьте все необходимые команды для установки вашего проекта
+# команду установки зависимостей, сборки статики, применения миграций и другие
+make install && make collectstatic && make migrate
