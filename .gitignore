@@ -13,3 +13,5 @@ setup.cfg
 .env
 hexlet_code.egg-info/
 staticfiles/
+venv/
+
