@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-test-and-sonar:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python Environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install Dependencies
+      run: |
+        pip install uv
+        make install
+    
+    - name: Run Linter
+      run: |
+        make lint
+        
+    - name: Run Tests with Coverage
+      run: |
+        make coverage
+      env:
+        DJANGO_SETTINGS_MODULE: task_manager.tests.settings_test
+        
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v4
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
