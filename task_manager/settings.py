@@ -29,7 +29,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
-ALLOWED_HOSTS=['python-project-52-yj6x.onrender.com', 'webserver']
+raw_hosts = os.getenv('ALLOWED_HOSTS', '')
+hosts = [h.strip() for h in raw_hosts.split(',') if h.strip()]
+if 'webserver' not in hosts:
+    hosts.append('webserver')
+
+ALLOWED_HOSTS = hosts
 
 ROLLBAR = {
     'access_token': os.getenv("ROLLBAR_ACCESS_TOKEN"),

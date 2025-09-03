@@ -14,7 +14,7 @@ migrate:
 	uv run python manage.py migrate
 
 lint:
-	uv run flake8 task_manager
+	uv run ruff check .
 
 test:
 	uv run python manage.py test task_manager.tests
