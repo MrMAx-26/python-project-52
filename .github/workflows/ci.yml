@@ -11,24 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     
     - name: Set up Python Environment
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'
+        python-version: '3.10'
     
     - name: Install Dependencies
       run: |
-        pip install -r requirements.txt 
-        pip install ruff
+        pip install uv
+        make install
     
     - name: Run Linter
       run: |
-        ruff check .  
+        make lint
         
     - name: Run Tests with Coverage
       run: |
@@ -36,22 +35,9 @@ jobs:
       env:
         DJANGO_SETTINGS_MODULE: task_manager.tests.settings_test
         
-    - name: Run Migrations
-      run: |
-        python manage.py migrate
-      env:
-        DJANGO_SETTINGS_MODULE: task_manager.settings  
-
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@v4
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-
-    - name: Upload Coverage Report
-      if: success()  
-      uses: actions/upload-artifact@v3 
-      with:
-        name: coverage-report
-        path: coverage.xml  
