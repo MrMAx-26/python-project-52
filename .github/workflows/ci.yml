@@ -23,7 +23,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
-        pip install -r requirements.txt
+        pip install -r requirements.txt 
         pip install ruff
     
     - name: Run Linter
@@ -51,7 +51,7 @@ jobs:
 
     - name: Upload Coverage Report
       if: success()  
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3 
       with:
         name: coverage-report
-        path: coverage.xml
+        path: coverage.xml  
