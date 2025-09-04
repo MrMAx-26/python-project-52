@@ -27,10 +27,6 @@ dev = [
     "ruff>=0.9.6",
 ]
 
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
-
 [tool.setuptools]
 packages = ["task_manager", "task_manager.labels", "task_manager.statuses", "task_manager.tasks", "task_manager.users", "task_manager.tests"]
 
