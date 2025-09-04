@@ -1,43 +1,61 @@
-name: Continuous Integration
+name: Python CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
-  lint-test-and-sonar:
+  test-and-sonarqube:
     runs-on: ubuntu-latest
-    
+
+    env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DJANGO_SETTINGS_MODULE: task_manager.settings
+        ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
+        ROLLBAR_ENV: development
+
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    
-    - name: Set up Python Environment
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    
-    - name: Install Dependencies
-      run: |
-        pip install uv
-        make install
-    
-    - name: Run Linter
-      run: |
-        make lint
-        
-    - name: Run Tests with Coverage
-      run: |
-        make coverage
-      env:
-        DJANGO_SETTINGS_MODULE: task_manager.tests.settings_test
-        
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v4
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: make ci-install
+
+      - name: Show versions
+        run: |
+          python --version
+          uv --version
+          uv run python -c "import django,sys; print('Django', django.get_version())"
+      
+      - name: Run Ruff linter
+        run: make lint
+
+      - name: Run migrations
+        run: make ci-migrate
+
+      - name: Run tests with coverage
+        run: make ci-test
+
+      - name: SonarQubeScan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=lyovaparsyan94_python-project-52
+            -Dsonar.organization=lyovaparsyan94
+            -Dsonar.python.coverage.reportPaths=coverage.xml
