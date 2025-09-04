@@ -1,7 +1,5 @@
 build:
-	python -m venv venv
-	. venv/bin/activate && pip install -r requirements.txt
-	./build.sh
+	build.sh
 
 render-start:
 	gunicorn task_manager.wsgi
