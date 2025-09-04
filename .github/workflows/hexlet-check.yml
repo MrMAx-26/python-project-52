@@ -23,11 +23,6 @@ jobs:
         with:
           python-version: '3.12'  
 
-      - name: Install dependencies
-        run: |
-          pip install hatch
-          hatch build    
-
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:
