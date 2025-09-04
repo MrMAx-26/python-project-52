@@ -2,6 +2,7 @@
 # скачиваем uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source $HOME/.local/bin/venv
+source venv/bin/activate
 
 
 # здесь добавьте все необходимые команды для установки вашего проекта
