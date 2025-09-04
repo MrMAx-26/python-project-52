@@ -23,6 +23,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install uv
+        pip install django
         make install
     
     - name: Run Linter
