@@ -24,9 +24,7 @@ coverage:
 
 run:
 	uv run python manage.py runserver
-	ci-install:
-	uv sync --group dev
-
+	
 ci-install:
 	uv sync --group dev
 	
