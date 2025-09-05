@@ -22,15 +22,25 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(max_length=255, unique=True, verbose_name="Name"),
+                    models.CharField(
+                        max_length=255,
+                        unique=True,
+                        verbose_name="Name"
+                    )
                 ),
                 (
                     "created_at",
-                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        verbose_name="Created at"
+                    ),
                 ),
                 (
                     "updated_at",
-                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                    models.DateTimeField(
+                        auto_now=True,
+                        verbose_name="Updated at"
+                    ),
                 ),
             ],
         ),

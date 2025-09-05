@@ -17,13 +17,15 @@ class Migration(migrations.Migration):
             model_name="task",
             name="labels",
             field=models.ManyToManyField(
-                related_name="tasks_labels", to="labels.label", verbose_name="Labels"
+                related_name="tasks_labels", to="labels.label", 
+                verbose_name="Labels"
             ),
         ),
         migrations.AlterField(
             model_name="task",
             name="created_at",
-            field=models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+            field=models.DateTimeField(auto_now_add=True, 
+                verbose_name="Created at"),
         ),
         migrations.AlterField(
             model_name="task",
@@ -43,7 +45,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="task",
             name="name",
-            field=models.CharField(max_length=150, unique=True, verbose_name="Name"),
+            field=models.CharField(max_length=150, unique=True, 
+                verbose_name="Name"),
         ),
         migrations.AlterField(
             model_name="task",
@@ -68,6 +71,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="task",
             name="updated_at",
-            field=models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+            field=models.DateTimeField(auto_now=True, 
+                verbose_name="Updated at"),
         ),
     ]

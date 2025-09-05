@@ -144,6 +144,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
-
-# Добавьте комментарий для ясности
-# Чтобы Django обнаруживал тесты в отдельной папке, убедитесь, что она находится внутри приложения и содержит файлы test_*.py. Если это новое приложение, добавьте его в INSTALLED_APPS.

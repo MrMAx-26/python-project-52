@@ -57,7 +57,10 @@ class Migration(migrations.Migration):
             name="groups",
             field=models.ManyToManyField(
                 blank=True,
-                help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                help_text=(
+                    "The groups this user belongs to. A user will get all permissions "
+                    "granted to each of their groups."
+                ),
                 related_name="user_set",
                 related_query_name="user",
                 to="auth.group",
@@ -69,8 +72,11 @@ class Migration(migrations.Migration):
             name="is_active",
             field=models.BooleanField(
                 default=True,
-                help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
-                verbose_name="active",
+                help_text=(
+                    "Designates whether this user should be treated as active. "
+                    "Unselect this instead of deleting accounts."
+                ),
+            verbose_name="active",
             ),
         ),
         migrations.AddField(
@@ -78,7 +84,9 @@ class Migration(migrations.Migration):
             name="is_staff",
             field=models.BooleanField(
                 default=False,
-                help_text="Designates whether the user can log into this admin site.",
+                help_text=(
+                    "Designates whether the user can log into this admin site."
+                ),
                 verbose_name="staff status",
             ),
         ),
@@ -87,7 +95,10 @@ class Migration(migrations.Migration):
             name="is_superuser",
             field=models.BooleanField(
                 default=False,
-                help_text="Designates that this user has all permissions without explicitly assigning them.",
+                help_text=(
+                    "Designates that this user has all permissions without explicitly "
+                    "assigning them."
+                ),
                 verbose_name="superuser status",
             ),
         ),
@@ -114,18 +125,21 @@ class Migration(migrations.Migration):
             model_name="user",
             name="username",
             field=models.CharField(
-                default="guest", max_length=150, unique=True, verbose_name="Username"
+                default="guest", max_length=150, unique=True, 
+                verbose_name="Username"
             ),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name="user",
             name="last_name",
-            field=models.CharField(max_length=255, verbose_name="Last name"),
+            field=models.CharField(max_length=255, 
+                verbose_name="Last name"),
         ),
         migrations.AlterField(
             model_name="user",
             name="password",
-            field=models.CharField(max_length=128, verbose_name="password"),
+            field=models.CharField(max_length=128, 
+                verbose_name="password"),
         ),
     ]
