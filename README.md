@@ -5,6 +5,9 @@
 ### Coverage
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MrMAx-26_python-project-52&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MrMAx-26_python-project-52)
 
+### Visit my page
+https://python-project-52-yj6x.onrender.com/
+
 
 # Task Manager
 A modern, robust task management system built with Django and Python. This application provides a comprehensive solution for organizing, tracking, and managing tasks in a collaborative environment. The system implements user authentication, role-based access control, and flexible task organization using statuses and labels.
